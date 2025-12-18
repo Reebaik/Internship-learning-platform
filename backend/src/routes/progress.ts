@@ -16,6 +16,12 @@ router.post(
 
         const completedChapters = progressStore[userId] || [];
 
+        if (completedChapters.includes(chapterId)) {
+            return res
+                .status(403)
+                .json({ message: "Chapter already completed" });
+        }
+
         if (chapterId > 1 && !completedChapters.includes(chapterId - 1)) {
             return res
                 .status(403)
@@ -28,5 +34,6 @@ router.post(
         res.status(200).json({ message: "Chapter completed" });
     }
 );
+
 
 export default router;

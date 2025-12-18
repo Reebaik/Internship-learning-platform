@@ -4,18 +4,26 @@ import jwt from "jsonwebtoken";
 
 const JWT_SECRET = "test-secret";
 
-describe("Progress - Sequential Chapter Completion", () => {
+describe("Progress - Prevent duplicate chapter completion", () => {
     const studentToken = jwt.sign(
-        { userId: "student-1", role: "student" },
+        { userId: "student-duplicate", role: "student" },
         JWT_SECRET
     );
 
-    it("should block completing chapter 2 before chapter 1", async () => {
-        const res = await request(app)
-            .post("/api/progress/2/complete")
+    it("should block completing the same chapter twice", async () => {
+        // First completion → should succeed
+        const first = await request(app)
+            .post("/api/progress/1/complete")
             .set("Authorization", `Bearer ${studentToken}`);
 
-        expect(res.status).toBe(403);
-        expect(res.body.message).toBe("Complete previous chapters first");
+        expect(first.status).toBe(200);
+
+        // Second completion → should fail
+        const second = await request(app)
+            .post("/api/progress/1/complete")
+            .set("Authorization", `Bearer ${studentToken}`);
+
+        expect(second.status).toBe(403);
+        expect(second.body.message).toBe("Chapter already completed");
     });
 });
