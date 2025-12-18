@@ -1,12 +1,10 @@
-
-
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 
-const JWT_SECRET = "test-secret"; // env var later
+const JWT_SECRET = "test-secret";
 
 export const authMiddleware = (
-    req: Request,
+    req: Request & { user?: any },
     res: Response,
     next: NextFunction
 ) => {
@@ -23,7 +21,8 @@ export const authMiddleware = (
     }
 
     try {
-        jwt.verify(token, JWT_SECRET);
+        const decoded = jwt.verify(token, JWT_SECRET);
+        req.user = decoded;
         next();
     } catch {
         return res.status(401).json({ message: "Unauthorized" });
