@@ -36,4 +36,28 @@ router.post(
 );
 
 
+
+const TOTAL_CHAPTERS = 5;
+router.get(
+    "/my",
+    authMiddleware,
+    studentOnly,
+    (req, res) => {
+        const userId = req.user!.userId;
+        const completedChapters = progressStore[userId] || [];
+
+        const completedCount = completedChapters.length;
+        const percentage = Math.floor(
+            (completedCount / TOTAL_CHAPTERS) * 100
+        );
+
+        res.status(200).json({
+            completedChapters: completedCount,
+            totalChapters: TOTAL_CHAPTERS,
+            percentage
+        });
+    }
+);
+
+
 export default router;
