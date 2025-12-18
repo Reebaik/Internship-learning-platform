@@ -1,4 +1,9 @@
+
+
 import { Request, Response, NextFunction } from "express";
+import jwt from "jsonwebtoken";
+
+const JWT_SECRET = "test-secret"; // env var later
 
 export const authMiddleware = (
     req: Request,
@@ -11,5 +16,16 @@ export const authMiddleware = (
         return res.status(401).json({ message: "Unauthorized" });
     }
 
-    next();
+    const [scheme, token] = authHeader.split(" ");
+
+    if (scheme !== "Bearer" || !token) {
+        return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    try {
+        jwt.verify(token, JWT_SECRET);
+        next();
+    } catch {
+        return res.status(401).json({ message: "Unauthorized" });
+    }
 };
