@@ -4,7 +4,8 @@ import { studentOnly } from "../middleware/studentOnly";
 
 const router = Router();
 
-const progressStore: Record<string, number[]> = {};
+export const progressStore: Record<string, number[]> = {};
+
 
 router.post(
     "/:chapterId/complete",

@@ -1,11 +1,14 @@
 import express from "express";
 import coursesRouter from "./routes/courses";
 import progressRouter from "./routes/progress";
+import certificatesRouter from "./routes/certificates";
 
 const app = express();
 app.use(express.json());
 
 app.use("/api/courses", coursesRouter);
 app.use("/api/progress", progressRouter);
+app.use("/api/certificates", certificatesRouter);
+
 
 export default app;
