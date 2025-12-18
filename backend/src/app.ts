@@ -1,14 +1,9 @@
 import express from "express";
+import coursesRouter from "./routes/courses";
 
 const app = express();
-
-// middleware
 app.use(express.json());
 
-// temporary test route
-app.get("/health", (req, res) => {
-    res.status(200).json({ status: "ok" });
-});
+app.use("/api/courses", coursesRouter);
 
 export default app;
-
