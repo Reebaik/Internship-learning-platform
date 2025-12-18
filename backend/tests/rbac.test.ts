@@ -6,7 +6,6 @@ const JWT_SECRET = "test-secret";
 
 describe("RBAC - Role Based Access Control", () => {
     it("should return 403 when student accesses mentor-only route", async () => {
-        // create a STUDENT token
         const studentToken = jwt.sign(
             { userId: "student-1", role: "student" },
             JWT_SECRET
@@ -18,5 +17,19 @@ describe("RBAC - Role Based Access Control", () => {
 
         expect(res.status).toBe(403);
         expect(res.body.message).toBe("Forbidden");
+    });
+
+    it("should allow mentor to access mentor-only route", async () => {
+        const mentorToken = jwt.sign(
+            { userId: "mentor-1", role: "mentor" },
+            JWT_SECRET
+        );
+
+        const res = await request(app)
+            .post("/api/courses")
+            .set("Authorization", `Bearer ${mentorToken}`);
+
+        expect(res.status).toBe(200);
+        expect(res.body.message).toBe("Course created");
     });
 });
