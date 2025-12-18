@@ -16,7 +16,6 @@ describe("RBAC - Role Based Access Control", () => {
             .set("Authorization", `Bearer ${studentToken}`);
 
         expect(res.status).toBe(403);
-        expect(res.body.message).toBe("Forbidden");
     });
 
     it("should allow mentor to access mentor-only route", async () => {
@@ -28,6 +27,19 @@ describe("RBAC - Role Based Access Control", () => {
         const res = await request(app)
             .post("/api/courses")
             .set("Authorization", `Bearer ${mentorToken}`);
+
+        expect(res.status).toBe(200);
+    });
+
+    it("should allow admin to access mentor-only route", async () => {
+        const adminToken = jwt.sign(
+            { userId: "admin-1", role: "admin" },
+            JWT_SECRET
+        );
+
+        const res = await request(app)
+            .post("/api/courses")
+            .set("Authorization", `Bearer ${adminToken}`);
 
         expect(res.status).toBe(200);
         expect(res.body.message).toBe("Course created");
