@@ -4,7 +4,7 @@ import { studentOnly } from "../middleware/studentOnly";
 import { AuthRequest } from "../types/auth.types";
 import {
     getCompletedChapters,
-    completeChapter
+    completeChapterSequential
 } from "../services/progress.service";
 
 const router = Router();
@@ -17,17 +17,14 @@ router.post(
         const chapterId = Number(req.params.chapterId);
         const userId = req.user!.userId;
 
-        const completedChapters = await getCompletedChapters(userId);
-
-        if (chapterId > 1 && !completedChapters.includes(chapterId - 1)) {
-            return res
-                .status(403)
-                .json({ message: "Complete previous chapters first" });
-        }
-
         try {
-            await completeChapter(userId, chapterId);
+            await completeChapterSequential(userId, chapterId);
         } catch (err: any) {
+            if (err.message === "PREVIOUS") {
+                return res
+                    .status(403)
+                    .json({ message: "Complete previous chapters first" });
+            }
             if (err.message === "DUPLICATE") {
                 return res
                     .status(403)

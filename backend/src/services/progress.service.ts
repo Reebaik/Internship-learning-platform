@@ -31,3 +31,26 @@ export async function completeChapter(
         throw new Error(error.message);
     }
 }
+
+export async function completeChapterSequential(
+    studentId: string,
+    chapterId: number
+): Promise<void> {
+    const { error } = await supabase.rpc(
+        "complete_chapter_sequential",
+        {
+            p_student_id: studentId,
+            p_chapter_id: chapterId
+        }
+    );
+
+    if (error) {
+        if (error.message.includes("PREVIOUS_CHAPTER_NOT_COMPLETED")) {
+            throw new Error("PREVIOUS");
+        }
+        if (error.code === "23505") {
+            throw new Error("DUPLICATE");
+        }
+        throw new Error(error.message);
+    }
+}
