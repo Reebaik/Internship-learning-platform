@@ -1,9 +1,11 @@
-import { Router } from "express";
+import { Router, Response } from "express";
 import { authMiddleware } from "../middleware/auth";
 import { studentOnly } from "../middleware/studentOnly";
+import { AuthRequest } from "../types/auth.types";
 
 const router = Router();
 
+// TEMP (will be replaced by DB)
 export const progressStore: Record<string, number[]> = {};
 
 
@@ -11,7 +13,7 @@ router.post(
     "/:chapterId/complete",
     authMiddleware,
     studentOnly,
-    (req, res) => {
+    (req: AuthRequest, res: Response) => {
         const chapterId = Number(req.params.chapterId);
         const userId = req.user!.userId;
 
@@ -43,7 +45,7 @@ router.get(
     "/my",
     authMiddleware,
     studentOnly,
-    (req, res) => {
+    (req: AuthRequest, res: Response) => {
         const userId = req.user!.userId;
         const completedChapters = progressStore[userId] || [];
 

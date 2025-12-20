@@ -1,7 +1,8 @@
-import { Router } from "express";
+import { Router, Response } from "express";
 import { authMiddleware } from "../middleware/auth";
 import { roleMiddleware } from "../middleware/role";
 import { progressStore } from "./progress";
+import { AuthRequest } from "../types/auth.types";
 
 const TOTAL_CHAPTERS = 5;
 const router = Router();
@@ -10,7 +11,7 @@ router.get(
     "/progress",
     authMiddleware,
     roleMiddleware("mentor"),
-    (req, res) => {
+    (req: AuthRequest, res: Response) => {
         const analytics = Object.entries(progressStore).map(
             ([studentId, chapters]) => ({
                 studentId,

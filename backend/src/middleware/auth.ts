@@ -1,10 +1,11 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
+import { AuthRequest, AuthUser } from "../types/auth.types";
 
 const JWT_SECRET = "test-secret";
 
 export const authMiddleware = (
-    req: Request & { user?: any },
+    req: AuthRequest,
     res: Response,
     next: NextFunction
 ) => {
@@ -21,7 +22,7 @@ export const authMiddleware = (
     }
 
     try {
-        const decoded = jwt.verify(token, JWT_SECRET);
+        const decoded = jwt.verify(token, JWT_SECRET) as AuthUser;
         req.user = decoded;
         next();
     } catch {

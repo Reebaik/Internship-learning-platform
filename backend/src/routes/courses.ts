@@ -1,6 +1,7 @@
-import { Router } from "express";
+import { Router, Response } from "express";
 import { authMiddleware } from "../middleware/auth";
 import { roleMiddleware } from "../middleware/role";
+import { AuthRequest } from "../types/auth.types";
 
 const router = Router();
 
@@ -8,7 +9,7 @@ router.post(
     "/",
     authMiddleware,
     roleMiddleware("mentor"),
-    (req, res) => {
+    (req, res: Response) => {
         res.status(200).json({ message: "Course created" });
     }
 );

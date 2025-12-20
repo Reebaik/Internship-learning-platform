@@ -1,6 +1,7 @@
-import { Router } from "express";
+import { Router, Response } from "express";
 import { authMiddleware } from "../middleware/auth";
 import { studentOnly } from "../middleware/studentOnly";
+import { AuthRequest } from "../types/auth.types";
 
 // SAME store used by progress route
 import { progressStore } from "./progress";
@@ -13,7 +14,7 @@ router.get(
     "/:courseId",
     authMiddleware,
     studentOnly,
-    (req, res) => {
+    (req: AuthRequest, res: Response) => {
         const userId = req.user!.userId;
         const completedChapters = progressStore[userId] || [];
 

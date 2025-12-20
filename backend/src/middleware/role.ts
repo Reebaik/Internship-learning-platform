@@ -1,14 +1,13 @@
-import { Request, Response, NextFunction } from "express";
-
-type Role = "student" | "mentor" | "admin";
+import { Response, NextFunction } from "express";
+import { AuthRequest, Role } from "../types/auth.types";
 
 export const roleMiddleware = (requiredRole: Role) => {
-    return (req: Request, res: Response, next: NextFunction) => {
+    return (req: AuthRequest, res: Response, next: NextFunction) => {
         if (!req.user) {
             return res.status(403).json({ message: "Forbidden" });
         }
 
-        // ✅ Admin bypass
+        // admin bypass
         if (req.user.role === "admin") {
             return next();
         }

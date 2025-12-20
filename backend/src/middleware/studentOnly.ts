@@ -1,7 +1,8 @@
 import { Request, Response, NextFunction } from "express";
+import { AuthRequest } from "../types/auth.types"
 
 export const studentOnly = (
-    req: Request,
+    req: AuthRequest,
     res: Response,
     next: NextFunction
 ) => {
