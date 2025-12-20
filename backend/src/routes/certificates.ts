@@ -2,9 +2,7 @@ import { Router, Response } from "express";
 import { authMiddleware } from "../middleware/auth";
 import { studentOnly } from "../middleware/studentOnly";
 import { AuthRequest } from "../types/auth.types";
-
-// SAME store used by progress route
-import { progressStore } from "./progress";
+import { getCompletedChapters } from "../services/progress.service";
 
 const TOTAL_CHAPTERS = 5;
 
@@ -14,9 +12,10 @@ router.get(
     "/:courseId",
     authMiddleware,
     studentOnly,
-    (req: AuthRequest, res: Response) => {
+    async (req: AuthRequest, res: Response) => {
         const userId = req.user!.userId;
-        const completedChapters = progressStore[userId] || [];
+
+        const completedChapters = await getCompletedChapters(userId);
 
         if (completedChapters.length < TOTAL_CHAPTERS) {
             return res.status(403).json({

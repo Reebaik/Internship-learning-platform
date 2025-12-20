@@ -9,7 +9,7 @@ router.post(
     "/",
     authMiddleware,
     roleMiddleware("mentor"),
-    (req, res: Response) => {
+    (req: AuthRequest, res: Response) => {
         res.status(200).json({ message: "Course created" });
     }
 );
