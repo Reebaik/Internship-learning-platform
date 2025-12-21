@@ -2,22 +2,23 @@ import { Navigate } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
 import type { ReactNode } from "react";
 
-export function ProtectedRoute({
-    children,
-    allowedRoles
-}: {
+type Role = "student" | "mentor" | "admin";
+
+type Props = {
+    allowedRoles: Role[];
     children: ReactNode;
-    allowedRoles: string[];
-}) {
+};
+
+export function ProtectedRoute({ allowedRoles, children }: Props) {
     const { auth } = useAuth();
 
-    if (!auth.token) {
-        return <Navigate to="/login" />;
+    if (!auth.token || !auth.role) {
+        return <Navigate to="/login" replace />;
     }
 
     if (!allowedRoles.includes(auth.role)) {
-        return <Navigate to="/unauthorized" />;
+        return <Navigate to="/" replace />;
     }
 
-    return children;
+    return <>{children}</>;
 }

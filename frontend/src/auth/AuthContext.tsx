@@ -7,7 +7,13 @@ type AuthState = {
     role: Role | null;
 };
 
-const AuthContext = createContext<any>(null);
+type AuthContextType = {
+    auth: AuthState;
+    login: (token: string, role: Role) => void;
+    logout: () => void;
+};
+
+const AuthContext = createContext<AuthContextType | null>(null);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
     const [auth, setAuth] = useState<AuthState>({
@@ -22,7 +28,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     };
 
     const logout = () => {
-        localStorage.clear();
+        localStorage.removeItem("token");
+        localStorage.removeItem("role");
         setAuth({ token: null, role: null });
     };
 
@@ -33,4 +40,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     );
 }
 
-export const useAuth = () => useContext(AuthContext);
+export function useAuth() {
+    const ctx = useContext(AuthContext);
+    if (!ctx) {
+        throw new Error("useAuth must be used inside AuthProvider");
+    }
+    return ctx;
+}
