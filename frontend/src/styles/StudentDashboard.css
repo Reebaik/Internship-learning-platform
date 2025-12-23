@@ -1,0 +1,183 @@
+.student-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.student-header {
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.student-header h1 {
+    color: white;
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.student-main {
+    flex: 1;
+    padding: 60px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.courses-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.course-item {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    gap: 30px;
+}
+
+.course-item:hover {
+    transform: translateX(10px);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+}
+
+.course-item::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 4px;
+    background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+    border-radius: 15px 0 0 15px;
+}
+
+.course-info {
+    flex: 1;
+}
+
+.course-info h3 {
+    color: #2d3748;
+    margin: 0 0 10px 0;
+    font-size: 1.5rem;
+}
+
+.course-desc {
+    color: #718096;
+    margin: 10px 0;
+    line-height: 1.5;
+}
+
+.course-mentor {
+    color: #667eea;
+    font-weight: 600;
+    margin: 10px 0;
+}
+
+.chapter-info {
+    display: inline-block;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.course-actions {
+    flex-shrink: 0;
+}
+
+.empty-state {
+    text-align: center;
+    background: white;
+    border-radius: 15px;
+    padding: 60px 40px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+}
+
+.empty-text {
+    color: #718096;
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+.loading,
+.error {
+    text-align: center;
+    color: white;
+    font-size: 1.1rem;
+    padding: 40px 20px;
+}
+
+.error {
+    color: #fca5a5;
+    background: rgba(239, 68, 68, 0.2);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .student-header {
+        flex-direction: column;
+        gap: 20px;
+        padding: 15px 20px;
+    }
+
+    .student-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .header-right {
+        width: 100%;
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .student-main {
+        padding: 30px 20px;
+    }
+
+    .course-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .course-actions {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .student-main {
+        padding: 20px 15px;
+    }
+
+    .course-item {
+        padding: 20px;
+    }
+
+    .course-info h3 {
+        font-size: 1.2rem;
+    }
+
+    .empty-state {
+        padding: 40px 20px;
+    }
+}

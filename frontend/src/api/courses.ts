@@ -18,10 +18,10 @@ export async function fetchCourses(): Promise<Course[]> {
     return res.json();
 }
 
-// ✅ ADD THIS
-export async function createCourse(course: {
+export async function createCourse(payload: {
     title: string;
     description: string;
+    total_chapters: number;
 }) {
     const token = localStorage.getItem("token");
 
@@ -31,12 +31,63 @@ export async function createCourse(course: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`
         },
-        body: JSON.stringify(course)
+        body: JSON.stringify(payload)
     });
 
     if (!res.ok) {
-        const err = await res.json();
-        throw new Error(err.message || "Failed to create course");
+        throw new Error("Failed to create course");
+    }
+}
+export async function fetchMyCourses() {
+    const token = localStorage.getItem("token");
+
+    const res = await fetch(`${API_BASE}/courses/my`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+
+    if (!res.ok) {
+        throw new Error("Failed to fetch your courses");
+    }
+
+    return res.json();
+}
+
+export async function deleteCourse(courseId: string) {
+    const token = localStorage.getItem("token");
+
+    const res = await fetch(`${API_BASE}/courses/${courseId}`, {
+        method: "DELETE",
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+
+    if (!res.ok) {
+        throw new Error("Failed to delete course");
+    }
+}
+
+export async function updateCourse(
+    id: string,
+    payload: {
+        title: string;
+        description: string;
+        total_chapters: number;
+    }
+) {
+    const res = await fetch(`${API_BASE}/courses/${id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+        },
+        body: JSON.stringify(payload)
+    });
+
+    if (!res.ok) {
+        throw new Error("Failed to update course");
     }
 
     return res.json();

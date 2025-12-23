@@ -5,6 +5,7 @@ import certificatesRouter from "./routes/certificates";
 import mentorRouter from "./routes/mentor";
 import authRoutes from "./routes/auth";
 import cors from "cors";
+import chaptersRouter from "./routes/chapters";
 
 
 
@@ -31,6 +32,16 @@ app.use("/api/courses", coursesRouter);
 app.use("/api/progress", progressRouter);
 app.use("/api/certificates", certificatesRouter);
 app.use("/api/mentor", mentorRouter);
+app.use("/api/chapters", chaptersRouter);
 
+
+
+// Global error handler: log and always return JSON
+import { Request, Response, NextFunction } from "express";
+
+app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+    console.error("Unhandled error:", err);
+    res.status(500).json({ message: err.message || "Internal server error" });
+});
 
 export default app;

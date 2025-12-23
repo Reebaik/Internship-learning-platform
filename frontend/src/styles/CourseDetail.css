@@ -1,0 +1,359 @@
+.course-detail-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.detail-header {
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex: 1;
+}
+
+.back-link {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.back-link:hover {
+    transform: translateX(-5px);
+}
+
+.detail-header h1 {
+    color: white;
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.detail-main {
+    flex: 1;
+    padding: 60px 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* Course Info Section */
+.course-info-section {
+    margin-bottom: 40px;
+}
+
+.course-info-card {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+}
+
+.course-info-card h2 {
+    color: #2d3748;
+    margin: 0 0 20px 0;
+    font-size: 1.5rem;
+}
+
+.course-description {
+    color: #718096;
+    line-height: 1.7;
+    font-size: 1rem;
+    margin: 15px 0;
+}
+
+.course-mentor {
+    color: #667eea;
+    font-weight: 600;
+    font-size: 1.05rem;
+    margin: 15px 0;
+}
+
+/* Progress Section */
+.progress-section {
+    margin-bottom: 40px;
+}
+
+.progress-card {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+}
+
+.progress-card h2 {
+    color: #2d3748;
+    margin: 0 0 20px 0;
+    font-size: 1.5rem;
+}
+
+.progress-info {
+    margin-bottom: 20px;
+}
+
+.progress-stats {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 20px;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.stat-label {
+    color: #718096;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.stat-value {
+    color: #667eea;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.progress-bar-container {
+    background: #e2e8f0;
+    border-radius: 10px;
+    height: 30px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.progress-bar {
+    background: linear-gradient(90deg, #48bb78 0%, #38a169 100%);
+    height: 100%;
+    transition: width 0.5s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 0.85rem;
+}
+
+.completion-message {
+    background: linear-gradient(135deg, rgba(72, 187, 120, 0.1), rgba(56, 161, 105, 0.1));
+    border-left: 4px solid #48bb78;
+    color: #22543d;
+    padding: 15px;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+/* Chapters Section */
+.chapters-section {
+    margin-bottom: 40px;
+}
+
+.chapters-card {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+}
+
+.chapters-card h2 {
+    color: #2d3748;
+    margin: 0 0 25px 0;
+    font-size: 1.5rem;
+}
+
+.chapters-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.chapter-item {
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 20px;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+}
+
+.chapter-item:hover:not(.locked) {
+    border-color: #667eea;
+    box-shadow: 0 5px 20px rgba(102, 126, 234, 0.2);
+}
+
+.chapter-item.completed {
+    background: rgba(72, 187, 120, 0.05);
+    border-color: #48bb78;
+}
+
+.chapter-item.locked {
+    opacity: 0.7;
+    background: rgba(0, 0, 0, 0.02);
+}
+
+.chapter-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex: 1;
+}
+
+.chapter-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.chapter-item.completed .chapter-icon {
+    background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+}
+
+.check-mark {
+    font-size: 1.5rem;
+}
+
+.lock-mark {
+    font-size: 1.2rem;
+}
+
+.chapter-info {
+    flex: 1;
+}
+
+.chapter-info h3 {
+    color: #2d3748;
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.completed-badge,
+.locked-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-top: 5px;
+}
+
+.completed-badge {
+    background: rgba(72, 187, 120, 0.2);
+    color: #22543d;
+}
+
+.locked-badge {
+    background: rgba(160, 174, 192, 0.2);
+    color: #4a5568;
+}
+
+/* Certificate Section */
+.certificate-section {
+    margin-bottom: 40px;
+}
+
+.certificate-card {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 165, 0, 0.1));
+    border: 2px solid rgba(255, 215, 0, 0.3);
+    border-radius: 15px;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(255, 215, 0, 0.15);
+}
+
+.certificate-card h2 {
+    color: #744210;
+    margin: 0 0 15px 0;
+    font-size: 1.8rem;
+}
+
+.certificate-text {
+    color: #744210;
+    font-size: 1.05rem;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .detail-header {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px 20px;
+    }
+
+    .header-left {
+        width: 100%;
+        gap: 10px;
+    }
+
+    .detail-header h1 {
+        font-size: 1.3rem;
+    }
+
+    .detail-main {
+        padding: 30px 20px;
+    }
+
+    .chapter-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .progress-stats {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .certificate-card {
+        padding: 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    .detail-main {
+        padding: 20px 15px;
+    }
+
+    .course-info-card,
+    .progress-card,
+    .chapters-card,
+    .certificate-card {
+        padding: 20px;
+    }
+
+    .course-info-card h2,
+    .progress-card h2,
+    .chapters-card h2,
+    .certificate-card h2 {
+        font-size: 1.3rem;
+    }
+
+    .chapter-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

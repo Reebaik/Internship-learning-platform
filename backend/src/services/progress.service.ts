@@ -34,7 +34,7 @@ export async function completeChapter(
 
 export async function completeChapterSequential(
     studentId: string,
-    chapterId: number
+    chapterId: string // uuid
 ): Promise<void> {
     const { error } = await supabase.rpc(
         "complete_chapter_sequential",

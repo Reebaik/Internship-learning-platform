@@ -1,0 +1,136 @@
+/*
+	Mentor Dashboard - Modern Dark Theme
+	- Red/black/gray palette
+	- Spacious, readable, professional
+	- Card-based layout, gradients, subtle glassmorphism
+*/
+
+:root {
+	--mentor-bg: #18181b;
+	--mentor-card: #232326;
+	--mentor-accent: #e11d48;
+	--mentor-accent2: #be123c;
+	--mentor-border: #27272a;
+	--mentor-text: #f4f4f5;
+	--mentor-muted: #a1a1aa;
+	--mentor-shadow: 0 8px 32px 0 rgba(0,0,0,0.25);
+}
+
+.mentor-dashboard-container {
+	min-height: 100vh;
+	background: linear-gradient(120deg, #18181b 0%, #232326 60%, #e11d48 100%);
+	background-size: 200% 200%;
+	animation: mentorGradientMove 8s ease-in-out infinite;
+	padding: 0;
+	width: 100vw;
+	box-sizing: border-box;
+}
+@keyframes mentorGradientMove {
+	0% { background-position: 0% 50%; }
+	50% { background-position: 100% 50%; }
+	100% { background-position: 0% 50%; }
+}
+
+.mentor-dashboard-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background: rgba(30, 30, 36, 0.97);
+	border-bottom: 2.5px solid var(--mentor-border);
+	padding: 3rem 5vw 2rem 5vw;
+	box-shadow: 0 6px 40px 0 rgba(225,29,72,0.13);
+	border-radius: 0 0 32px 32px;
+	min-width: 320px;
+}
+.mentor-dashboard-header h1 {
+	color: var(--mentor-accent);
+	font-size: 2.7rem;
+	font-weight: 900;
+	letter-spacing: 0.05em;
+	margin: 0;
+	text-shadow: 0 2px 18px #be123c77;
+}
+
+.mentor-dashboard-main {
+	max-width: 1100px;
+	min-width: 320px;
+	min-height: 70vh;
+	margin: 4rem auto 0 auto;
+	padding: 3.5rem 3vw 3.5rem 3vw;
+	background: rgba(30,30,36,0.99);
+	border-radius: 32px;
+	box-shadow: 0 16px 64px 0 rgba(0,0,0,0.32);
+	display: flex;
+	flex-direction: column;
+	gap: 3rem;
+}
+
+.card {
+	margin-bottom: 2.5rem;
+	padding: 2.5rem 2rem;
+	border-radius: 20px;
+	background: var(--mentor-card);
+	box-shadow: 0 2px 16px 0 rgba(225,29,72,0.08);
+	border: 1.5px solid var(--mentor-border);
+}
+
+.mentor-course-list {
+	display: flex;
+	flex-direction: column;
+	gap: 2.2rem;
+}
+
+.mentor-course-card {
+	background: var(--mentor-card);
+	border-radius: 18px;
+	box-shadow: 0 8px 40px 0 rgba(225,29,72,0.16);
+	padding: 2rem 2.5rem;
+	display: flex;
+	flex-direction: column;
+	gap: 1.2rem;
+	border: 2px solid var(--mentor-border);
+	transition: box-shadow 0.3s, transform 0.3s;
+	margin-bottom: 0.7rem;
+	min-width: 220px;
+}
+.mentor-course-card:hover {
+	box-shadow: 0 24px 80px 0 rgba(225,29,72,0.25);
+	transform: translateY(-8px) scale(1.02);
+}
+
+.mentor-course-title {
+	color: var(--mentor-text);
+	font-size: 1.5rem;
+	font-weight: 900;
+	margin-bottom: 0.5rem;
+	letter-spacing: 0.01em;
+}
+
+.mentor-course-desc {
+	color: var(--mentor-muted);
+	font-size: 1.13rem;
+	margin-bottom: 1rem;
+	line-height: 1.7;
+}
+
+.mentor-course-actions {
+	display: flex;
+	gap: 2rem;
+	margin-top: 1.1rem;
+}
+
+@media (max-width: 1200px) {
+	.mentor-dashboard-main {
+		max-width: 98vw;
+		padding: 2.2rem 1vw;
+	}
+	.card {
+		padding: 1.5rem 0.7rem;
+	}
+	.mentor-dashboard-header {
+		padding: 1.5rem 1vw 1.2rem 1vw;
+	}
+	.mentor-course-card {
+		padding: 1.2rem 0.7rem;
+	}
+}
